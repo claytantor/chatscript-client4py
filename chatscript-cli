@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+# coding: utf-8
+import sys
+import sockethandler
+
+def main(argv):
+    hostName = argv[0]
+    portNumber = int(argv[1])
+    user = argv[2]
+    robotName = argv[3]
+
+    client = sockethandler.SocketHandler()
+    client.connect(hostName, portNumber)
+    message = "{0}\x00{1}\x00{2}\x00".format(user,robotName,"Hello Harry.");
+    client.send(message)
+    response = client.receive()
+    print response
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
