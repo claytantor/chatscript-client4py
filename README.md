@@ -2,6 +2,12 @@
 This is a very simple chat client for chatscript. For use with charscript
 server ie. https://hub.docker.com/r/claytantor/chatscript-docker/
 
+## Installation
+
+```
+python setup.py install
+```
+
 ## Using The CLI
 ```
 ./chatscript-cli localhost 1024 joe harry
