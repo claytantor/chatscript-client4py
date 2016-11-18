@@ -9,12 +9,24 @@ def main(argv):
     user = argv[2]
     robotName = argv[3]
 
-    client = sockethandler.SocketHandler()
-    client.connect(hostName, portNumber)
-    message = "{0}\x00{1}\x00{2}\x00".format(user,robotName,"Hello Harry.");
-    client.send(message)
-    response = client.receive()
-    print response
+    listening = True
+    while listening:
+        line = sys.stdin.readline()
+        if not line:
+            break
+        else:
+            if(":quit" in line):
+                print "goodbye."
+                break
+            sys.stdout.write("{0}: {1}".format(user,line))
+            client = sockethandler.SocketHandler()
+            message = "{0}\x00{1}\x00{2}\x00".format(user,robotName,line);
+            client.connect(hostName, portNumber)
+            client.send(message)
+            response = client.receive()
+            client.close()
+            print "{0}: {1}".format(robotName,response)
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])

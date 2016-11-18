@@ -12,6 +12,10 @@ class SocketHandler:
   def connect(self, host, port):
     self.sock.connect((host, port))
 
+  def close(self):
+    self.sock.shutdown(1) 
+    self.sock.close()
+
   def send(self, msg):
     totalsent = 0
     MSGLEN = len(msg)
